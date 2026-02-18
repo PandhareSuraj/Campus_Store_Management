@@ -7,8 +7,8 @@
 
     <div class="card mt-3">
         <div class="card-body">
-            <h5>Final Approval Section</h5>
-            <p>Manage overall campus store approvals.</p>
+            <h5>Approve Store Requests</h5>
+            <p>View and approve department purchase requests.</p>
         </div>
     </div>
 </div>
