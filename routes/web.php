@@ -12,6 +12,10 @@ Route::get('/', function () {
 })->name('home');
 
 
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
 
 //Route for stationery requests
 
