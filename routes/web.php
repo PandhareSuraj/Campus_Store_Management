@@ -6,10 +6,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StationeryController;
 
 
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
 
 Route::get('/home', function () {
     return view('welcome');
