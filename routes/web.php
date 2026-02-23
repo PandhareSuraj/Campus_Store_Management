@@ -4,22 +4,34 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StationeryController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 
-
-
+// Default route → Login Page
 Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+    return view('auth.login');
+});
+//LOGIN
+// Login page route
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
-Route::get('/home', function () {
-    return view('welcome');
-})->name('home');
+// Registration routes
+Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register'])->name('register.store');
 
-//Route for stationery requests
+
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
+    ->name('admin.dashboard');
+
+Route::get('/user/dashboard', function () {
+    return view('user.dashboard');
+})->name('user.dashboard');
+
 
 Route::middleware(['auth'])->group(function () {
 
-    // User
+    // Stationery Request - User
     Route::get('/stationery/request', [StationeryController::class, 'create']);
     Route::post('/stationery/request', [StationeryController::class, 'store']);
 
@@ -35,17 +47,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/trust/requests', [StationeryController::class, 'trustRequests']);
     Route::post('/trust/approve/{id}', [StationeryController::class, 'trustApprove']);
 
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 });
-
-//Route for dashboards
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-});
-
-//Route for registration
-Route::get('/register', [RegisterController::class, 'showForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register'])->name('register.store');
 
 
 require __DIR__.'/settings.php';
